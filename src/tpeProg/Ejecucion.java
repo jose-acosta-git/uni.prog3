@@ -20,19 +20,29 @@ public class Ejecucion {
 		
 		g.agregarArco(1,2,3);
 		g.agregarArco(1,3,4);
+		g.agregarArco(1, 4, 5);
 		g.agregarArco(2,4,6);
 		g.agregarArco(2,7,9);
+		g.agregarArco(3, 2, 5);
+		g.agregarArco(3, 5, 8);
+		g.agregarArco(4, 2, 6);
 		g.agregarArco(5,3,8);
+		g.agregarArco(5,2,7);
 		g.agregarArco(7,3,10);
 		g.agregarArco(7,5,12);
 		
 		System.out.println(g);
 		
-		ServicioDFS dfs = new ServicioDFS(g);
+		/*ServicioDFS dfs = new ServicioDFS(g);
 		System.out.println(dfs.dfsForest());
 		
 		ServicioBFS bfs = new ServicioBFS(g);
-		System.out.println(bfs.bfsForest());
+		System.out.println(bfs.bfsForest());*/
+		
+		ServicioCaminos caminos7 = new ServicioCaminos(g, 1, 2, 7);
+		System.out.println(caminos7.caminos());
+		
+		
 	}
 
 }
