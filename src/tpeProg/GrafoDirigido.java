@@ -111,5 +111,18 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		IteradorArcos<T> it = new IteradorArcos<T>(arcos);
 		return it;
 	}
+	
+	@Override
+	public String toString() {
+		String r = "";
+		for (Integer vertice : this.vertices.keySet()) {
+			r += "Vertice valor: " + vertice + ". Arcos:\n";
+			for (Entry<Integer, T> adyacencia : this.vertices.get(vertice).entrySet()) {
+				r += "adyacente: " + adyacencia.getKey() + " etiqueta: " + adyacencia.getValue() + "\n";
+			}
+			r += "\n";
+		}
+		return r;
+	}
 
 }
