@@ -1,6 +1,5 @@
 package tpeProg;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,13 +11,13 @@ public class ServicioBFS {
 	private Grafo<?> grafo;
 	private LinkedList<Integer> fila;
 	private LinkedList<Integer> recorrido;
-	private Set<Integer> visited;
+	private Set<Integer> visitados;
 	
 	public ServicioBFS(Grafo<?> grafo) {
 		this.grafo = grafo;
 		this.fila = new LinkedList<Integer>();
 		this.recorrido = new LinkedList<Integer>();
-		this.visited = new HashSet<>();
+		this.visitados = new HashSet<>();
 	}
 	
 	public List<Integer> bfsForest() {
@@ -26,7 +25,7 @@ public class ServicioBFS {
 		
 		while (it.hasNext()) {
 			Integer verticeActual = it.next();
-			if (!visited.contains(verticeActual)) {
+			if (!visitados.contains(verticeActual)) {
 				this.bfs(verticeActual);
 			}
 		}
@@ -34,7 +33,7 @@ public class ServicioBFS {
 	}
 	
 	private void bfs(Integer vertice) {
-		this.visited.add(vertice);
+		this.visitados.add(vertice);
 		this.recorrido.add(vertice);
 		this.fila.add(vertice);
 		
@@ -44,8 +43,8 @@ public class ServicioBFS {
 			
 			while (adyacentes.hasNext()) {
 				Integer adyacente = adyacentes.next();
-				if (!visited.contains(adyacente)) {
-					this.visited.add(adyacente);
+				if (!visitados.contains(adyacente)) {
+					this.visitados.add(adyacente);
 					this.recorrido.add(adyacente);
 					this.fila.add(adyacente);
 				}

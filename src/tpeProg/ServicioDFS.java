@@ -11,12 +11,12 @@ public class ServicioDFS {
 
 	private Grafo<?> grafo;
 	private List<Integer> recorrido;
-	private Set<Integer> visited;
+	private Set<Integer> visitados;
 
 	public ServicioDFS(Grafo<?> grafo) {
 		this.grafo = grafo;
 		this.recorrido = new LinkedList<Integer>();
-		this.visited = new HashSet<>();
+		this.visitados = new HashSet<>();
 	}
 	
 	public List<Integer> dfsForest() {
@@ -24,7 +24,7 @@ public class ServicioDFS {
 		
 		while (it.hasNext()) {
 			Integer verticeActual = it.next();
-			if (!visited.contains(verticeActual)) {
+			if (!visitados.contains(verticeActual)) {
 				this.dfs(verticeActual);
 			}
 		}
@@ -32,13 +32,13 @@ public class ServicioDFS {
 	}
 	
 	private void dfs(Integer vertice) {
-		this.visited.add(vertice);
+		this.visitados.add(vertice);
 		this.recorrido.add(vertice);
 		Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(vertice);
 		
 		while (adyacentes.hasNext()) {
 			Integer adyacente = adyacentes.next();
-			if (!this.visited.contains(adyacente)) {
+			if (!this.visitados.contains(adyacente)) {
 				this.dfs(adyacente);
 			}
 		}
