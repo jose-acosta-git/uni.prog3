@@ -1,13 +1,10 @@
 package tpeProg;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import com.sun.prism.shader.FillCircle_Color_AlphaTest_Loader;
 
 public class ServicioCaminos {
 
@@ -22,8 +19,6 @@ public class ServicioCaminos {
 	//para marcar los viistados uso un Set ya que tanto el .add como el .remove tienen complejidad 0
 	//y no necesito que los elementos esten ordenados
 	private Set<Integer> visitados;
-	//variable para llevar la cuenta de los arcos que recorro en cada estado
-	private int arcosRecorridos;
 	
 	// Servicio caminos
 	public ServicioCaminos(Grafo<?> grafo, int origen, int destino, int lim) {
@@ -34,7 +29,6 @@ public class ServicioCaminos {
 		this.caminos = new LinkedList<>();
 		this.camino = new LinkedList<Integer>();
 		this.visitados = new HashSet<>();
-		this.arcosRecorridos = 0;
 	}
 
 	public List<List<Integer>> caminos() {
