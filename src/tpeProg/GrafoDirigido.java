@@ -1,11 +1,9 @@
 package tpeProg;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
-import java.util.Set;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	
@@ -125,7 +123,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	 * */
 	@Override
 	public Iterator<Integer> obtenerVertices() {
-		return new IteradorVertices(this.vertices.keySet());
+		return this.vertices.keySet().iterator();
 	}
 
 	/*
@@ -138,7 +136,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
 		if (this.contieneVertice(verticeId)) {
-			return new IteradorVertices(this.vertices.get(verticeId).keySet());
+			return this.vertices.get(verticeId).keySet().iterator();
 		}
 		return null;
 	}
