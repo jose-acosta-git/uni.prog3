@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import com.sun.javafx.geom.AreaOp.AddOp;
-
 public class GrafoDirigido<T> implements Grafo<T> {
 	
 	private HashMap<Integer, HashMap<Integer, T>> vertices;
@@ -17,7 +15,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad: O(1): agregar un elemento a un
-	 * HashMap tiene complejidad constante
+	 * HashMap tiene complejidad computacional constante
 	 * */
 	@Override
 	public void agregarVertice(int verticeId) {
@@ -26,7 +24,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad: O(1): eliminar un elemento
-	 * de un HashMap tiene complejidad constante
+	 * de un HashMap tiene complejidad computacional constante
 	 * */
 	@Override
 	public void borrarVertice(int verticeId) {
@@ -35,7 +33,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad O(1):
-	 * 		contieneVertice: HashMap.containsKey: O(1)
+	 * 		contieneVertice => HashMap.containsKey: O(1)
 	 * 		HashMap.get: O(1)
 	 * 		HashMap.put: O(1)
 	 * */
@@ -48,7 +46,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad O(1):
-	 * 		contieneVertice: HashMap.containsKey: O(1)
+	 * 		contieneVertice => HashMap.containsKey: O(1)
 	 * 		HashMap.get: O(1)
 	 * 		HashMap.remove: O(1)
 	 * */
@@ -61,7 +59,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad O(1): el metodo ContainsKey
-	 * de un HashMap tiene complejidad O(1)
+	 * de un HashMap tiene complejidad constante
 	 * */
 	@Override
 	public boolean contieneVertice(int verticeId) {
@@ -70,7 +68,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	/*
 	 * Complejidad O(1):
-	 *		contieneVertice: HashMap.containsKey: O(1)
+	 *		contieneVertice => HashMap.containsKey: O(1)
 	 *		HashMap.get: O(1)
 	 *		HashMap.containsKey: O(1)
 	 * */
@@ -83,7 +81,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	
 	/*
 	 * Complejidad: O(1)
-	 * 		contieneVertice: HashMap.containsKey: O(1)
+	 * 		contieneVertice => HashMap.containsKey: O(1)
 	 * 		HashMap.get: O(1)
 	 * */
 	@Override
@@ -104,10 +102,10 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	/*
-	 * Complejidad: O(x) donde x es la cantidad de vertices del grafo,
-	 * ya que si bien los metodos get y size del HashMap son constantes,
+	 * Complejidad: O(X) donde X es la cantidad de vertices del grafo,
+	 * ya que si bien los metodos get() y size() del HashMap son constantes,
 	 * este metodo recorre todos los vertices para poder sumar los arcos
-	 * de cada vertice. 
+	 * de cada vertice.
 	 * */
 	@Override
 	public int cantidadArcos() {
@@ -130,7 +128,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 
 	/*
 	 * Complejidad O(1)
-	 * 		contieneVertice: HashMap.containsKey: O(1)
+	 * 		contieneVertice => HashMap.containsKey: O(1)
 	 * 		HashMap.get: O(1)
 	 * 		HashMap.keySet: O(1)
 	 * 		Set.iterator() de la implementacion de Set que devuelve HashMap.keySet(): O(1)
@@ -144,12 +142,12 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	/*
-	 * Complejidad O(v * a) donde v es la cantidad de vertices y a la cantidad de arcos del grafo.
-	 * Seguramente haya una mejor forma de implementarlo pero la unica que se me
+	 * Complejidad O(V * A) donde V es la cantidad de vertices y A la cantidad de arcos del grafo.
+	 * Probablemente haya una mejor forma de implementarlo pero la unica que se me
 	 * ocurrió es recorrer todos los adyacentes de todos los vertices para instanciar
-	 * los Arcos, agregarlos a una lista (LinkedList para que al menos agregarlos
-	 * tenga complejidad constante) y luego en la clase IteradorArcos simplemente
-	 * le pido el iterador a la LinkedList (complejidad constante)
+	 * los Arcos (ya que en esta implementacion no estan instanciados como objetos Arco<T>),
+	 * agregarlos a una lista (LinkedList para que al menos el metodo .add()
+	 * tenga complejidad constante) y luego le pido a la LinkedList que me devuelva un iterador (O(1))
 	 * */
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
@@ -163,14 +161,14 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	}
 
 	/*
-	 * Complejidad O(a) donde a es la cantidad de arcos cuyo origen es el vertice
+	 * Complejidad O(A) donde A es la cantidad de arcos cuyo origen es el vertice
 	 * que recibe el metodo como parametro (o la cantidad de vertices adyacentes al mismo).
 	 * Nuevamente, debe haber una mejor forma de implementarlo, pero la que a mi
-	 * se me ocurrió consiste en iterar todos los arcos que salen del vertice
-	 * indicado (es decir iterar los vertices adyacentes al mismo) e ir instanciando
-	 * los Arcos, para luego agregarlos a una LinkedList(complejidad computacional constante).
-	 * Luego en la clase IteradorArcos solo se utiliza el metodo iterator() de la clase
-	 * LinkedList, cuya complejidad computacional tambien es constante
+	 * se me ocurrió consiste en:
+	 * 		iterar todos los arcos que salen del vertice indicado (es decir iterar los vertices adyacentes al mismo): O(A)
+	 * 		ir instanciando los Arcos<T>: O(1)
+	 * 		agregarlos a una LinkedList => LinkedList.add(): O(1)
+	 * 		pedirle un iterator() a la Linked List => LinkedList.iterator(): O(1)
 	 * */
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
@@ -185,7 +183,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		return arcos.iterator();
 	}
 	
-	//Complejidad O(v * a) donde v es la cantidad de vertices y a la cantidad de arcos del grafo, por recorrerlos.
+	//Complejidad O(V * A) donde V es la cantidad de vertices y A la cantidad de arcos del grafo, por recorrerlos.
 	public String toString() {
 		String r = "";
 		for (Integer vertice : this.vertices.keySet()) {

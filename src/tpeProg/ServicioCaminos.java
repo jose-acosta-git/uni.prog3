@@ -15,9 +15,14 @@ public class ServicioCaminos {
 	private int origen;
 	private int destino;
 	private int lim;
+	//lista que voy a retornar
 	private List<List<Integer>> caminos;
+	//lista que voy a usar para ir armando los posibles caminos
 	private LinkedList<Integer> camino;
+	//para marcar los viistados uso un Set ya que tanto el .add como el .remove tienen complejidad 0
+	//y no necesito que los elementos esten ordenados
 	private Set<Integer> visitados;
+	//variable para llevar la cuenta de los arcos que recorro en cada estado
 	private int arcosRecorridos;
 	
 	// Servicio caminos
@@ -38,10 +43,12 @@ public class ServicioCaminos {
 		return caminos;
 	}
 	
+	//Metodo recursivo que busca un camino dado un vertice y la cantidad de arcos que recorrí
 	private void buscarCamino(int verticeActual, int arcosRecorridos) {
 		visitados.add(verticeActual);
 		
 		if (verticeActual == destino) {
+			//Agrega la solucion a la lista de soluciones
 			caminos.add(new LinkedList<>(camino));
 		} else if (arcosRecorridos < lim) {
 			Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(verticeActual);
