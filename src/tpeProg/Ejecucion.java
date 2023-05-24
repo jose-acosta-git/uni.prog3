@@ -31,7 +31,7 @@ public class Ejecucion {
 		g.agregarArco(7,3,10);
 		g.agregarArco(7,5,12);
 		
-		System.out.println(g);
+		System.out.println(g.obtenerArcos(1));
 		
 		/*ServicioDFS dfs = new ServicioDFS(g);
 		System.out.println(dfs.dfsForest());
@@ -39,8 +39,8 @@ public class Ejecucion {
 		ServicioBFS bfs = new ServicioBFS(g);
 		System.out.println(bfs.bfsForest());*/
 		
-		ServicioCaminos caminos7 = new ServicioCaminos(g, 1, 2, 7);
-		System.out.println(caminos7.caminos());
+		//ServicioCaminos caminos7 = new ServicioCaminos(g, 1, 2, 7);
+		//System.out.println(caminos7.caminos());
 		
 		
 	}
