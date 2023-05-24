@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
+import com.sun.javafx.geom.AreaOp.AddOp;
+
 public class GrafoDirigido<T> implements Grafo<T> {
 	
 	private HashMap<Integer, HashMap<Integer, T>> vertices;
@@ -157,8 +159,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 				arcos.add(new Arco<T>(vertice, adyacente, this.vertices.get(vertice).get(adyacente)));
 			}
 		}
-		IteradorArcos<T> it = new IteradorArcos<T>(arcos);
-		return it;
+		return arcos.iterator();
 	}
 
 	/*
@@ -176,22 +177,12 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if (!this.contieneVertice(verticeId)) {
 			return null;
 		}
-		HashMap<Integer, T> arcos = this.vertices.get(verticeId);
-		System.out.println(this.vertices);
-		System.out.println(arcos);
 		
-		IteradorArcos2<T> it = new IteradorArcos2<T>(arcos);
-		
-		return null;
-		
-		
-		/*
 		LinkedList<Arco<T>> arcos = new LinkedList<>();
 		for (Integer adyacente : this.vertices.get(verticeId).keySet()) {
 			arcos.add(new Arco<T>(verticeId, adyacente, this.vertices.get(verticeId).get(adyacente)));
 		}
-		IteradorArcos<T> it = new IteradorArcos<T>(arcos);
-		return it;*/
+		return arcos.iterator();
 	}
 	
 	//Complejidad O(v * a) donde v es la cantidad de vertices y a la cantidad de arcos del grafo, por recorrerlos.
