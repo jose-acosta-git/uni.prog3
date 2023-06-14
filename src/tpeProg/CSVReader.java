@@ -1,9 +1,10 @@
-package ProgramacionIII.tpe;
+package tpeProg;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,11 @@ public class CSVReader {
 	
 	public CSVReader(String path) {
 		this.path = path;
+	}
+	
+	public static void main(String[] args) {
+		CSVReader reader = new CSVReader("datasets/dataset1.txt");
+		reader.read();
 	}
 	
 	public void read() {
@@ -28,7 +34,12 @@ public class CSVReader {
 			Integer destino = Integer.parseInt(line[1].trim().substring(1));
 			Integer etiqueta = Integer.parseInt(line[2].trim());
 			
+			System.out.println(line.toString());
+			
 			// Aca instanciar lo que necesiten en base a los datos leidos
+			System.out.println(origen);
+			System.out.println(destino);
+			System.out.println(etiqueta);
 		}
 		
 	}
