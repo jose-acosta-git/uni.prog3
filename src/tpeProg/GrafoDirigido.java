@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
+import java.util.Collections;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 	
@@ -143,7 +144,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 		if (this.contieneVertice(verticeId)) {
 			return this.vertices.get(verticeId).keySet().iterator();
 		}
-		return null;
+		return Collections.emptyIterator();
 	}
 
 	/*
