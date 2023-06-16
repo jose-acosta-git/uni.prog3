@@ -192,11 +192,11 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public String toString() {
 		String r = "";
 		for (Integer vertice : this.vertices.keySet()) {
-			r += "Vertice valor: " + vertice + ". Arcos:\n";
 			for (Entry<Integer, T> adyacencia : this.vertices.get(vertice).entrySet()) {
-				r += "adyacente: " + adyacencia.getKey() + " etiqueta: " + adyacencia.getValue() + "\n";
+				r += vertice + ";";
+				r += adyacencia.getKey() + ";" + adyacencia.getValue();
+				r += "\n";
 			}
-			r += "\n";
 		}
 		return r;
 	}
