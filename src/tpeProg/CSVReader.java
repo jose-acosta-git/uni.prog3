@@ -16,12 +16,7 @@ public class CSVReader {
 		this.path = path;
 	}
 	
-	public static void main(String[] args) {
-		CSVReader reader = new CSVReader("datasets/dataset1.txt");
-		reader.read();
-	}
-	
-	public void read() {
+	public <T> void read(GrafoDirigido<T> grafo) {
 		
 		// Obtengo una lista con las lineas del archivo
 		// lines.get(0) tiene la primer linea del archivo
@@ -34,12 +29,10 @@ public class CSVReader {
 			Integer destino = Integer.parseInt(line[1].trim().substring(1));
 			Integer etiqueta = Integer.parseInt(line[2].trim());
 			
-			System.out.println(line.toString());
-			
 			// Aca instanciar lo que necesiten en base a los datos leidos
-			System.out.println(origen);
-			System.out.println(destino);
-			System.out.println(etiqueta);
+			grafo.agregarVertice(origen);
+			grafo.agregarVertice(destino);
+			grafo.agregarArco(origen, destino, (T) etiqueta);
 		}
 		
 	}
