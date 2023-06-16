@@ -8,9 +8,11 @@ import java.util.Map.Entry;
 public class GrafoDirigido<T> implements Grafo<T> {
 	
 	private HashMap<Integer, HashMap<Integer, T>> vertices;
+	private int cantidadArcos;
 	
 	public GrafoDirigido() {
 		this.vertices = new HashMap<>();
+		this.cantidadArcos = 0;
 	}
 
 	/*
@@ -46,6 +48,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
 		if (this.contieneVertice(verticeId1) && this.contieneVertice(verticeId2)) {
 			vertices.get(verticeId1).put(verticeId2, etiqueta);
+			this.cantidadArcos++;
 		}
 	}
 
@@ -59,6 +62,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	public void borrarArco(int verticeId1, int verticeId2) {
 		if (this.contieneVertice(verticeId1)) {
 			vertices.get(verticeId1).remove(verticeId2);
+			this.cantidadArcos--;
 		}
 	}
 
@@ -114,11 +118,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	 * */
 	@Override
 	public int cantidadArcos() {
-		int arcos = 0;
-		for (Integer vertice : this.vertices.keySet()) {
-			arcos += this.vertices.get(vertice).size();
-		}
-		return arcos;
+		return this.cantidadArcos;
 	}
 
 	/*
