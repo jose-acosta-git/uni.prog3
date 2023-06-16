@@ -16,10 +16,15 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	/*
 	 * Complejidad: O(1): agregar un elemento a un
 	 * HashMap tiene complejidad computacional constante
+	 * y preguntar a un HashMap si contiene una clave en
+	 * java damos por hecho que es de complejidad constante
+	 * aunque en el peor de los casos sabemos que es lineal
 	 * */
 	@Override
 	public void agregarVertice(int verticeId) {
-		this.vertices.put(verticeId, new HashMap<>());
+		if (!this.vertices.containsKey(verticeId)) {
+			this.vertices.put(verticeId, new HashMap<>());
+		}
 	}
 
 	/*
