@@ -44,7 +44,7 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	 * */
 	@Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		if (this.contieneVertice(verticeId1)) {
+		if (this.contieneVertice(verticeId1) && this.contieneVertice(verticeId2)) {
 			vertices.get(verticeId1).put(verticeId2, etiqueta);
 		}
 	}
