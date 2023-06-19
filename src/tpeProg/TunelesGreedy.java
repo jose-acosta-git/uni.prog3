@@ -10,13 +10,18 @@ public class TunelesGreedy {
 	
 	private GrafoDirigido<Integer> grafo;
 	private HashSet<Integer> estacionesSolucion;
+	private int cantidadIteraciones; 
+	private Timer timer;
 	
 	public TunelesGreedy(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
 		this.estacionesSolucion = new HashSet<>(); 
+		this.cantidadIteraciones = 0;
+		this.timer = new Timer();
 	}
 	
-	public List<Arco<Integer>> buscarSolucion() {
+	public String buscarSolucion() {
+		timer.start();
 		LinkedList<Arco<Integer>> solucion = new LinkedList<>();
 		LinkedList<Arco<Integer>> tuneles = obtenerTuneles();
 		ComparadorArcos comparador = new ComparadorArcos();
@@ -29,6 +34,7 @@ public class TunelesGreedy {
 		tuneles.removeFirst();
 		
 		while (!tuneles.isEmpty() && !esSolucion(solucion) ) {
+			cantidadIteraciones++;
 			Arco<Integer> tunel = tuneles.getFirst();
 			tuneles.removeFirst();
 			if (esFactible(tunel)) {
@@ -42,10 +48,9 @@ public class TunelesGreedy {
 			}
 		}
 		if (esSolucion(solucion)) {
-			return solucion;
+			return escribirRetorno(solucion, true, timer.stop());
 		} else {
-			System.out.println("No se encontró una solución.");
-			return null;
+			return escribirRetorno(solucion, false, timer.stop());
 		}
 	}
 	
@@ -69,11 +74,34 @@ public class TunelesGreedy {
 		return true;
 	}
 	
-	//Es factible si en mi solucion actual ya llego a alguna de las dos estaciones del nuevo tunel
+	//Es factible si en mi solucion actual ya llego a alguna de las dos estaciones del nuevo tunel, pero no a ambas,
+	//ya que sino estaria construyendo 2 tuneles entre 2 estaciones
 	private boolean esFactible(Arco<Integer> tunel) {
 		return
-				this.estacionesSolucion.contains(tunel.getVerticeOrigen()) ||
-				this.estacionesSolucion.contains(tunel.getVerticeDestino()) ;
+				(
+						this.estacionesSolucion.contains(tunel.getVerticeOrigen()) ||
+						this.estacionesSolucion.contains(tunel.getVerticeDestino())
+				)
+				&&
+				!(
+						this.estacionesSolucion.contains(tunel.getVerticeOrigen()) &&
+						this.estacionesSolucion.contains(tunel.getVerticeDestino())
+				);
+	}
+	
+	private String escribirRetorno(LinkedList<Arco<Integer>> solucion, boolean encontroSolucion, double tiempo) {
+		String retorno = "Greedy\n";
+		if (encontroSolucion) {
+			int kmTotales = 0;
+			for (Arco<Integer> tunel : solucion) {
+				retorno += "E" + tunel.getVerticeOrigen() + "-E" + tunel.getVerticeDestino() + ",";
+				kmTotales += tunel.getEtiqueta();
+			}
+			retorno += "\nKm totales de la solucion: " + kmTotales + "km\n";
+			retorno += "Costo temporal de la busqueda de solucion: " + tiempo + " segundos\n";
+			retorno += "Cantidad de iteraciones necesarias en la solucion Greedy: " + this.cantidadIteraciones + " iteraciones";
+		}
+		return retorno;
 	}
 
 }

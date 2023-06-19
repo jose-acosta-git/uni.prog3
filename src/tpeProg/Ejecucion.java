@@ -13,9 +13,9 @@ public class Ejecucion {
 		
 		TunelesGreedy greedy = new TunelesGreedy(grafo);
 		
-		System.out.println("mejor solucion greedy: " + greedy.buscarSolucion());
+		System.out.println(greedy.buscarSolucion());
 		
-		System.out.println("mejor solucion backtracking: " + backtracking.buscarSolucion());
+		//System.out.println("mejor solucion backtracking: " + backtracking.buscarSolucion());
 	}
 	
 	public static void greedy(GrafoDirigido<Integer> grafo) {
