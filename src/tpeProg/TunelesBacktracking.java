@@ -35,8 +35,6 @@ public class TunelesBacktracking {
 					esSolucion(solucionActual) &&
 					(kmActuales < kmMejorSolucion || this.mejorSolucion.isEmpty())
 				) {
-				System.out.println("encontro solucion");
-				System.out.println(solucionActual);
 				this.mejorSolucion = (LinkedList<Arco<Integer>>) solucionActual.clone();
 				this.kmMejorSolucion = kmActuales;
 			}
