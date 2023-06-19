@@ -29,5 +29,10 @@ public class Arco<T> {
 	public T getEtiqueta() {
 		return etiqueta;
 	}
+	
+	@Override
+		public String toString() {
+			return verticeOrigen + ";" + verticeDestino + ";" + etiqueta + "\n";
+		}
 
 }
