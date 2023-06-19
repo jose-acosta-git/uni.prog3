@@ -6,12 +6,16 @@ public class Ejecucion {
 
 	public static void main(String[] args) {
 		GrafoDirigido<Integer> grafo = new GrafoDirigido<Integer>();
-		CSVReader reader = new CSVReader("datasets/dataset1.txt");
+		CSVReader reader = new CSVReader("datasets/dataset2.txt");
 		reader.read(grafo);
 		
 		TunelesBacktracking backtracking = new TunelesBacktracking(grafo);
 		
-		System.out.println("mejor solucion: " + backtracking.buscarSolucion());
+		TunelesGreedy greedy = new TunelesGreedy(grafo);
+		
+		System.out.println("mejor solucion greedy: " + greedy.buscarSolucion());
+		
+		System.out.println("mejor solucion backtracking: " + backtracking.buscarSolucion());
 	}
 	
 	public static void greedy(GrafoDirigido<Integer> grafo) {
