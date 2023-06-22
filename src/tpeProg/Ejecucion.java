@@ -15,7 +15,9 @@ public class Ejecucion {
 		
 		System.out.println(greedy.buscarSolucion());
 		
-		//System.out.println("mejor solucion backtracking: " + backtracking.buscarSolucion());
+		System.out.println();
+		
+		System.out.println(backtracking.buscarSolucion());
 	}
 	
 	public static void greedy(GrafoDirigido<Integer> grafo) {

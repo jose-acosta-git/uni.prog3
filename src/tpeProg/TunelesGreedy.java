@@ -11,17 +11,17 @@ public class TunelesGreedy {
 	private GrafoDirigido<Integer> grafo;
 	private HashSet<Integer> estacionesSolucion;
 	private int cantidadIteraciones; 
-	private Timer timer;
 	
 	public TunelesGreedy(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
 		this.estacionesSolucion = new HashSet<>(); 
 		this.cantidadIteraciones = 0;
-		this.timer = new Timer();
 	}
 	
 	public String buscarSolucion() {
+		Timer timer = new Timer();
 		timer.start();
+		
 		LinkedList<Arco<Integer>> solucion = new LinkedList<>();
 		LinkedList<Arco<Integer>> tuneles = obtenerTuneles();
 		ComparadorArcos comparador = new ComparadorArcos();
@@ -97,11 +97,25 @@ public class TunelesGreedy {
 				retorno += "E" + tunel.getVerticeOrigen() + "-E" + tunel.getVerticeDestino() + ",";
 				kmTotales += tunel.getEtiqueta();
 			}
-			retorno += "\nKm totales de la solucion: " + kmTotales + "km\n";
-			retorno += "Costo temporal de la busqueda de solucion: " + tiempo + " segundos\n";
-			retorno += "Cantidad de iteraciones necesarias en la solucion Greedy: " + this.cantidadIteraciones + " iteraciones";
+			retorno += "\nKm totales de la solución: " + kmTotales + "km\n";
+			retorno += "Costo temporal de la busqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
+			retorno += "Cantidad de iteraciones necesarias en la solución Greedy: " + this.cantidadIteraciones + " iteraciones";
+		} else {
+			retorno += "No encontró solución.";
 		}
 		return retorno;
+	}
+	
+	private String convertirTiempo(double segundos) {
+		String tiempo = "";
+		if (segundos > 60) {
+			int minutos = (int) segundos / 60;
+			int segundosRestantes = (int) segundos % 60;
+			tiempo += minutos + " minuto/s " + segundosRestantes;
+		} else {
+			tiempo += segundos;
+		}
+		return tiempo;
 	}
 
 }

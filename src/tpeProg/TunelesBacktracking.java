@@ -13,22 +13,27 @@ public class TunelesBacktracking {
 	private LinkedList<Arco<Integer>> tuneles;
 	private LinkedList<Arco<Integer>> mejorSolucion;
 	private int kmMejorSolucion;
+	private int cantidadLlamadosRecursivos;
 	
 	public TunelesBacktracking(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
 		this.tuneles = new LinkedList<>();
 		this.mejorSolucion = new LinkedList<>();
 		this.kmMejorSolucion = 0;
+		this.cantidadLlamadosRecursivos = 0;
 	}
 	
-	public LinkedList<Arco<Integer>> buscarSolucion() {
+	public String buscarSolucion() {
+		Timer timer = new Timer();
+		timer.start();
 		obtenerArcos();
 		LinkedList<Arco<Integer>> solucion = new LinkedList<Arco<Integer>>();
 		backtracking(solucion, 0);
-		return this.mejorSolucion;
+		return escribirRetorno(timer.stop());
 	}
 	
 	private void backtracking(LinkedList<Arco<Integer>> solucionActual, int kmActuales) {
+		cantidadLlamadosRecursivos++;
 		//Caso de corte o primer caso
 		if (tuneles.isEmpty() || this.mejorSolucion.isEmpty()) {
 			if (
@@ -119,6 +124,29 @@ public class TunelesBacktracking {
 	//Retorna true si ya existe una mejor solucion con kms <= a la actual
 	private boolean poda(int kmActuales) {
 		return ( !this.mejorSolucion.isEmpty() && this.kmMejorSolucion <= kmActuales );
+	}
+	
+	private String escribirRetorno(double tiempo) {
+		String retorno = "Backtracking\n";
+		for (Arco<Integer> tunel : this.mejorSolucion) {
+			retorno += "E" + tunel.getVerticeOrigen() + "-E" + tunel.getVerticeDestino() + ",";
+		}
+		retorno += "\nKm totales de la solución: " + this.kmMejorSolucion + "km\n";
+		retorno += "Costo temporal de la búsqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
+		retorno += "Cantidad de llamados recursivos necesarios en la solución Backtracking: " + this.cantidadLlamadosRecursivos + " llamados";
+		return retorno;
+	}
+	
+	private String convertirTiempo(double segundos) {
+		String tiempo = "";
+		if (segundos > 60) {
+			int minutos = (int) segundos / 60;
+			int segundosRestantes = (int) segundos % 60;
+			tiempo += minutos + " minuto/s " + segundosRestantes;
+		} else {
+			tiempo += segundos;
+		}
+		return tiempo;
 	}
 
 }
