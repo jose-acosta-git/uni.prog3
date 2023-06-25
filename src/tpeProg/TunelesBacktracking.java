@@ -35,7 +35,7 @@ public class TunelesBacktracking {
 	private void backtracking(LinkedList<Arco<Integer>> solucionActual, int kmActuales) {
 		cantidadLlamadosRecursivos++;
 		//Caso de corte o primer caso
-		if (tuneles.isEmpty() || this.mejorSolucion.isEmpty()) {
+		if (tuneles.isEmpty()) {
 			if (
 					esSolucion(solucionActual) &&
 					(kmActuales < kmMejorSolucion || this.mejorSolucion.isEmpty())
@@ -43,7 +43,7 @@ public class TunelesBacktracking {
 				this.mejorSolucion = (LinkedList<Arco<Integer>>) solucionActual.clone();
 				this.kmMejorSolucion = kmActuales;
 			}
-		} if (!tuneles.isEmpty() && !poda(kmActuales)) {
+		} else if (!poda(kmActuales)) {
 			//Obtiene y elimina el primer tunel
 			Arco<Integer> tunel = tuneles.getFirst();
 			tuneles.removeFirst();
