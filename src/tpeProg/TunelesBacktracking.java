@@ -14,6 +14,7 @@ public class TunelesBacktracking {
 	private LinkedList<Arco<Integer>> mejorSolucion;
 	private int kmMejorSolucion;
 	private int cantidadEstadosGenerados;
+	private int cantidadEstadosFinales;
 	
 	public TunelesBacktracking(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
@@ -21,6 +22,7 @@ public class TunelesBacktracking {
 		this.mejorSolucion = new LinkedList<>();
 		this.kmMejorSolucion = 0;
 		this.cantidadEstadosGenerados = 0;
+		this.cantidadEstadosFinales = 0;
 	}
 	
 	public String buscarSolucion() {
@@ -36,6 +38,7 @@ public class TunelesBacktracking {
 		cantidadEstadosGenerados++;
 		//Caso de corte o primer caso
 		if (tuneles.isEmpty()) {
+			this.cantidadEstadosFinales++;
 			if (
 					esSolucion(solucionActual) &&
 					(kmActuales < kmMejorSolucion || this.mejorSolucion.isEmpty())
@@ -132,21 +135,10 @@ public class TunelesBacktracking {
 			retorno += "E" + tunel.getVerticeOrigen() + "-E" + tunel.getVerticeDestino() + ",";
 		}
 		retorno += "\nKm totales de la solución: " + this.kmMejorSolucion + "km\n";
-		retorno += "Costo temporal de la búsqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
-		retorno += "Cantidad de estados generados por el Backtracking: " + this.cantidadEstadosGenerados + " estados";
+		retorno += "Costo temporal de la búsqueda de solución: " + tiempo + " segundo/s\n";
+		retorno += "Cantidad de estados generados por el Backtracking: " + this.cantidadEstadosGenerados + " estados, "
+				+ "de los cuales " + this.cantidadEstadosFinales + " son estados finales.";
 		return retorno;
-	}
-	
-	private String convertirTiempo(double segundos) {
-		String tiempo = "";
-		if (segundos > 60) {
-			int minutos = (int) segundos / 60;
-			int segundosRestantes = (int) segundos % 60;
-			tiempo += minutos + " minuto/s " + segundosRestantes;
-		} else {
-			tiempo += segundos;
-		}
-		return tiempo;
 	}
 
 }

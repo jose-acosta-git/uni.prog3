@@ -99,24 +99,12 @@ public class TunelesGreedy {
 				kmTotales += tunel.getEtiqueta();
 			}
 			retorno += "\nKm totales de la solución: " + kmTotales + "km\n";
-			retorno += "Costo temporal de la busqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
+			retorno += "Costo temporal de la busqueda de solución: " + tiempo + " segundo/s\n";
 			retorno += "Cantidad de candidatos evaluados por el Greedy: " + this.cantidadCandidatosEvaluados + " candidatos";
 		} else {
 			retorno += "No encontró solución.";
 		}
 		return retorno;
-	}
-	
-	private String convertirTiempo(double segundos) {
-		String tiempo = "";
-		if (segundos > 60) {
-			int minutos = (int) segundos / 60;
-			int segundosRestantes = (int) segundos % 60;
-			tiempo += minutos + " minuto/s " + segundosRestantes;
-		} else {
-			tiempo += segundos;
-		}
-		return tiempo;
 	}
 
 }
