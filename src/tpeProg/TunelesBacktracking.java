@@ -13,14 +13,14 @@ public class TunelesBacktracking {
 	private LinkedList<Arco<Integer>> tuneles;
 	private LinkedList<Arco<Integer>> mejorSolucion;
 	private int kmMejorSolucion;
-	private int cantidadLlamadosRecursivos;
+	private int cantidadEstadosGenerados;
 	
 	public TunelesBacktracking(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
 		this.tuneles = new LinkedList<>();
 		this.mejorSolucion = new LinkedList<>();
 		this.kmMejorSolucion = 0;
-		this.cantidadLlamadosRecursivos = 0;
+		this.cantidadEstadosGenerados = 0;
 	}
 	
 	public String buscarSolucion() {
@@ -33,7 +33,7 @@ public class TunelesBacktracking {
 	}
 	
 	private void backtracking(LinkedList<Arco<Integer>> solucionActual, int kmActuales) {
-		cantidadLlamadosRecursivos++;
+		cantidadEstadosGenerados++;
 		//Caso de corte o primer caso
 		if (tuneles.isEmpty()) {
 			if (
@@ -133,7 +133,7 @@ public class TunelesBacktracking {
 		}
 		retorno += "\nKm totales de la solución: " + this.kmMejorSolucion + "km\n";
 		retorno += "Costo temporal de la búsqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
-		retorno += "Cantidad de llamados recursivos necesarios en la solución Backtracking: " + this.cantidadLlamadosRecursivos + " llamados";
+		retorno += "Cantidad de estados generados por el Backtracking: " + this.cantidadEstadosGenerados + " estados";
 		return retorno;
 	}
 	

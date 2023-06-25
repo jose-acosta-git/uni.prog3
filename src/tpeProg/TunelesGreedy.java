@@ -10,12 +10,12 @@ public class TunelesGreedy {
 	
 	private GrafoDirigido<Integer> grafo;
 	private HashSet<Integer> estacionesSolucion;
-	private int cantidadIteraciones; 
+	private int cantidadCandidatosEvaluados; 
 	
 	public TunelesGreedy(GrafoDirigido<Integer> grafo) {
 		this.grafo = grafo;
 		this.estacionesSolucion = new HashSet<>(); 
-		this.cantidadIteraciones = 0;
+		this.cantidadCandidatosEvaluados = 0;
 	}
 	
 	public String buscarSolucion() {
@@ -32,9 +32,10 @@ public class TunelesGreedy {
 		this.estacionesSolucion.add(primerTunel.getVerticeOrigen());
 		this.estacionesSolucion.add(primerTunel.getVerticeDestino());
 		tuneles.removeFirst();
+		this.cantidadCandidatosEvaluados++;
 		
 		while (!tuneles.isEmpty() && !esSolucion(solucion) ) {
-			cantidadIteraciones++;
+			cantidadCandidatosEvaluados++;
 			Arco<Integer> tunel = tuneles.getFirst();
 			tuneles.removeFirst();
 			if (esFactible(tunel)) {
@@ -99,7 +100,7 @@ public class TunelesGreedy {
 			}
 			retorno += "\nKm totales de la solución: " + kmTotales + "km\n";
 			retorno += "Costo temporal de la busqueda de solución: " + convertirTiempo(tiempo) + " segundo/s\n";
-			retorno += "Cantidad de iteraciones necesarias en la solución Greedy: " + this.cantidadIteraciones + " iteraciones";
+			retorno += "Cantidad de candidatos evaluados por el Greedy: " + this.cantidadCandidatosEvaluados + " candidatos";
 		} else {
 			retorno += "No encontró solución.";
 		}
