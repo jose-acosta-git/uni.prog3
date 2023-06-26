@@ -3,7 +3,7 @@
 ## Facultad de Ciencias Exactas
 ## UNICEN
 
-###Repositorio del Trabajo Práctico Entregable de Programación III.
+### Repositorio del Trabajo Práctico Entregable de Programación III.
 
 Resolución de un problema utilizando 2 estrategias distintas, Backtracking y Greedy.
 
