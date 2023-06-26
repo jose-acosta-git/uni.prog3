@@ -3,9 +3,6 @@ package tpeProg;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-
-import javafx.beans.binding.BooleanBinding;
 
 public class TunelesBacktracking {
 	
@@ -28,7 +25,7 @@ public class TunelesBacktracking {
 	public String buscarSolucion() {
 		Timer timer = new Timer();
 		timer.start();
-		obtenerArcos();
+		obtenerTuneles();
 		LinkedList<Arco<Integer>> solucion = new LinkedList<Arco<Integer>>();
 		backtracking(solucion, 0);
 		return escribirRetorno(timer.stop());
@@ -117,7 +114,7 @@ public class TunelesBacktracking {
 	}
 	
 	//Transforma el iterator en una lista para la implementacion del backtracking
-	private void obtenerArcos() {
+	private void obtenerTuneles() {
 		Iterator<Arco<Integer>> iterator = grafo.obtenerArcos();
 		while (iterator.hasNext()) {
 			tuneles.add(iterator.next());
